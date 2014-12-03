@@ -17,13 +17,13 @@ int main() {
 	std::cin.get();
 
 	cout << "Rendering map" << endl;
-	gen.getFloor(0).genFloorLayout();
+	gen.getFloors()[0].genFloorLayout();
 	std::cin.get();
 
 
-	for (int i = 0; i < gen.getFloor(0).getHeight(); i++) {
-		for (int j = 0; j < gen.getFloor(0).getWidth(); j++) {
-			cout << gen.getFloor(0).getTile(j, i);
+	for (int i = 0; i < gen.getFloors()[0].getHeight(); i++) {
+		for (int j = 0; j < gen.getFloors()[0].getWidth(); j++) {
+			cout << gen.getFloors()[0].getTile(j, i);
 		}
 		cout << endl;
 	}

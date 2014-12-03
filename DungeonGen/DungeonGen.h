@@ -7,20 +7,13 @@
 class DungeonGen {
 public:
 	DungeonGen() {}
-	~DungeonGen() {
-		delete [] floors;
-	}
 
-	//generation
 	void generateRandom(int floors);
 	void loadMonsters();
 
-	//access
-	Floor& getFloor(int i) { return floors[i]; }
-	int getAmountFloors() { return nFloors; }
+	std::vector<Floor> getFloors() { return floors; }
 private:
-	Floor* floors;
-	int nFloors;
+	std::vector<Floor> floors;
 	std::vector<Monster> monsterList;
 };
 #endif

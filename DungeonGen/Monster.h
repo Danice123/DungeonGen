@@ -10,10 +10,13 @@ public:
 	int getHealth() { return health; }
 	int getAttack() { return attack; }
 	int getArmor() { return armor; }
+	int getScale() { return scale; }
 private:
 	std::string name;
 	int health;
 	int attack;
 	int armor;
+
+	int scale;
 };
 #endif

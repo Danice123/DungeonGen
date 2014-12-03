@@ -9,6 +9,7 @@ Monster::Monster(std::string name) {
 	fin >> health;
 	fin >> attack;
 	fin >> armor;
+	fin >> scale;
 
 	fin.close();
 

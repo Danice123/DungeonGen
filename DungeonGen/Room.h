@@ -1,6 +1,8 @@
 #ifndef __DUNGEONROOM_
 #define __DUNGEONROOM_
 #include <cstdlib>
+#include <vector>
+#include "MonsterInstance.h"
 
 enum dir { NORTH = 0, SOUTH = 1, EAST = 2, WEST = 3 };
 
@@ -32,6 +34,7 @@ public:
 protected:
 	int width;
 	int height;
+	std::vector<MonsterInstance> monsters;
 private:
 	Room* nextRooms[4];
 	int adjRooms;

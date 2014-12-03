@@ -2,7 +2,6 @@
 #define __DUNGEONFLOOR_
 #include "Room.h"
 #include "OvalRoom.h"
-#include <vector>
 
 class Floor {
 public:
@@ -11,6 +10,7 @@ public:
 		for (int i = 0; i < height; i++) delete [] map[i];
 		delete [] map;
 	}
+
 	void genFloorLayout();
 
 	int getTile(int x, int y) {
