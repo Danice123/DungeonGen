@@ -5,7 +5,7 @@
 Monster::Monster(std::string name) {
 	std::ifstream fin;
 	fin.open("monsters/" + name + ".mon");
-	fin >> name;
+	fin >> this->name;
 	fin >> health;
 	fin >> attack;
 	fin >> armor;
