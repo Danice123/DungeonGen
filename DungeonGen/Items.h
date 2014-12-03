@@ -1,5 +1,5 @@
 #ifndef __ITEMS_
-#define __MITEMS_
+#define __ITEMS_
 #include <string>
 
 class Items {

@@ -4,6 +4,7 @@
 #include "OvalRoom.h"
 #include <vector>
 #include "MonsterInstance.h"
+#include "ItemInstance.h"
 
 class Floor {
 public:
@@ -22,11 +23,14 @@ public:
 	int getHeight() { return height; }
 
 	void loadMonsters(std::vector<Monster>* l) { monsterTemplates = l; }
+	void loadItems(std::vector<Items>* l) { itemTemplates = l; }
 private:
 	Room spawn;
 	char** map;
 	int width, height;
 	std::vector<MonsterInstance> monsters;
 	std::vector<Monster>* monsterTemplates;
+	std::vector<ItemInstance> items;
+	std::vector<Items>* itemTemplates;
 };
 #endif

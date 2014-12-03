@@ -4,6 +4,8 @@
 #include <vector>
 #include "Monster.h"
 #include "MonsterInstance.h"
+#include "ItemInstance.h"
+#include "Items.h"
 
 enum dir { NORTH = 0, SOUTH = 1, EAST = 2, WEST = 3 };
 
@@ -28,6 +30,7 @@ public:
 	void setRoom(dir d, Room* room);
 
 	virtual void generateMonsters(std::vector<Monster>& temp, std::vector<MonsterInstance>&, int mx, int my);
+	virtual void generateItems(std::vector<Items>& temp, std::vector<ItemInstance>&, int mx, int my);
 	virtual void printRoom(char** map, int mx, int my);
 
 	int x, y;

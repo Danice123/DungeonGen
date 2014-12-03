@@ -12,6 +12,10 @@ int main() {
 	gen.loadMonsters();
 	std::cin.get();
 
+	cout << "Loading Items" << endl;
+	gen.loadItems();
+	std::cin.get();
+
 	cout << "Generating map" << endl;
 	gen.generateRandom(1);
 	std::cin.get();

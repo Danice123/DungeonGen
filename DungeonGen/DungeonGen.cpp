@@ -8,6 +8,7 @@ void DungeonGen::generateRandom(int size) {
 	floors = new Floor[size];
 	for (int i = 0; i < size; i++) {
 		floors[i].loadMonsters(&monsterList);
+		floors[i].loadItems(&itemList);
 	}
 }
 
@@ -23,6 +24,22 @@ void DungeonGen::loadMonsters() {
 
 	for (int i = 0; i < names.size(); i++)
 		monsterList.push_back(Monster(names[i]));
+
+	fin.close();
+}
+
+void DungeonGen::loadItems() {
+	std::ifstream fin;
+	fin.open("items/items.list");
+	std::vector<string> names;
+
+	for (string s;!fin.eof();s = "") {
+		fin >> s;
+		names.push_back(s);
+	}
+
+	for (int i = 0; i < names.size(); i++)
+		itemList.push_back(Items(names[i]));
 
 	fin.close();
 }
