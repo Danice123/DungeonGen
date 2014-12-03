@@ -5,6 +5,8 @@
 #include <fstream>
 #include "Monster.h"
 #include "MonsterInstance.h"
+#include "ItemInstance.h"
+#include "Items.h"
 
 enum dir { NORTH = 0, SOUTH = 1, EAST = 2, WEST = 3 };
 
@@ -29,8 +31,11 @@ public:
 	Room* getRoom(dir d) { return nextRooms[d]; }
 	void setRoom(dir d, Room* room);
 
+<<<<<<< HEAD
 	virtual void generateMonsters(std::vector<Monster>& temp);
-	virtual void printRoom(char** map, int mx, int my, std::vector<MonsterInstance>& list);
+	virtual void generateItems(std::vector<Items>& temp);
+	virtual void printRoom(char** map, int mx, int my, 
+		std::vector<MonsterInstance>& list, std::vector<ItemInstance>& list2);
 
 	int x, y;
 	int id;

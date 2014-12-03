@@ -70,5 +70,11 @@
     <None Include="monsters\test.mon">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="items\items.list">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="items\test2.itm">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

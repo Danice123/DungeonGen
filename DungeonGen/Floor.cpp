@@ -156,6 +156,7 @@ void Floor::genFloorLayout() {
 	std::vector<Room*> check;
 	for (unsigned i = 0; i < rl.size(); i++) {
 		rl[i]->generateMonsters(*monsterTemplates);
+		rl[i]->generateItems(*itemTemplates, items);
 		rl[i]->printRoom(map, rl[i]->x - left, rl[i]->y - up, monsters);
 
 		if (rl[i]->getRoom(NORTH) != 0 && !search(check, rl[i]->getRoom(NORTH))) {
@@ -203,5 +204,9 @@ void Floor::genFloorLayout() {
 	for (int i = 0; i < monsters.size(); i++) {
 		char c = monsters[i].getName()[0];
 		map[monsters[i].getY()][monsters[i].getX()] = c;
+	}
+	for (int i = 0; i < items.size(); i++) {
+		char c = items[i].getName()[0];
+		map[items[i].getY()][items[i].getX()] = c;
 	}
 }

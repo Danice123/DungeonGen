@@ -108,6 +108,12 @@ void Room::generateMonsters(std::vector<Monster>& temp) {
 	m.setCoords(2, 2);
 	monsters.push_back(m);
 }
+void Room::generateItems(std::vector<Items>& temp, std::vector<ItemInstance>& list, int mx, int my) {
+	ItemInstance m(1, temp[0]);
+	m.setCoords(mx + 3, my + 3);
+	list.push_back(m);
+}
+
 
 void Room::printRoom(char** map, int mx, int my, std::vector<MonsterInstance>& list) {
 		for (int i = 0; i < height; i++)
