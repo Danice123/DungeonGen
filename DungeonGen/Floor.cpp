@@ -128,13 +128,14 @@ void Floor::genFloorLayout() {
 	width = -left + right;
 	height = -up + down;
 
-	map = new int*[height];
+	map = new char*[height];
 	for (int i = 0; i < height; i++) {
-		map[i] = new int[width];
-		for (int j = 0; j < width; j++) map[i][j] = 0;
+		map[i] = new char[width];
+		for (int j = 0; j < width; j++) map[i][j] = '0';
 	}
 	std::vector<Room*> check;
 	for (unsigned i = 0; i < rl.size(); i++) {
+		rl[i]->generateMonsters(*monsterTemplates, monsters, rl[i]->x - left, rl[i]->y - up);
 		rl[i]->printRoom(map, rl[i]->x - left, rl[i]->y - up);
 
 		if (rl[i]->getRoom(NORTH) != 0 && !search(check, rl[i]->getRoom(NORTH))) {
@@ -144,7 +145,7 @@ void Floor::genFloorLayout() {
 			int vary = lbound - sbound;
 			int coord = rand() % vary + sbound;
 			int length = rl[i]->y - rl[i]->getRoom(NORTH)->y - rl[i]->getRoom(NORTH)->getHeight() + 1;
-			for(int k = 1; k < length; k++) map[rl[i]->y - k - up][coord] = 1;
+			for(int k = 1; k < length; k++) map[rl[i]->y - k - up][coord] = '1';
 		}
 
 		if (rl[i]->getRoom(SOUTH) != 0 && !search(check, rl[i]->getRoom(SOUTH))) {
@@ -154,7 +155,7 @@ void Floor::genFloorLayout() {
 			int vary = lbound - sbound;
 			int coord = rand() % vary + sbound;
 			int length = rl[i]->getRoom(SOUTH)->y - rl[i]->y - rl[i]->getHeight() + 1;
-			for(int k = 1; k < length; k++) map[rl[i]->y + rl[i]->getHeight() - 1 + k - up][coord] = 1;
+			for(int k = 1; k < length; k++) map[rl[i]->y + rl[i]->getHeight() - 1 + k - up][coord] = '1';
 		}
 
 		if (rl[i]->getRoom(EAST) != 0 && !search(check, rl[i]->getRoom(EAST))) {
@@ -164,7 +165,7 @@ void Floor::genFloorLayout() {
 			int vary = lbound - sbound;
 			int coord = rand() % vary + sbound;
 			int length = rl[i]->getRoom(EAST)->x - rl[i]->x - rl[i]->getWidth() + 1;
-			for(int k = 1; k < length; k++) map[coord][rl[i]->x + rl[i]->getWidth() - 1 + k - left] = 1;
+			for(int k = 1; k < length; k++) map[coord][rl[i]->x + rl[i]->getWidth() - 1 + k - left] = '1';
 		}
 
 		if (rl[i]->getRoom(WEST) != 0 && !search(check, rl[i]->getRoom(WEST))) {
@@ -174,8 +175,13 @@ void Floor::genFloorLayout() {
 			int vary = lbound - sbound;
 			int coord = rand() % vary + sbound;
 			int length = rl[i]->x - rl[i]->getRoom(WEST)->x - rl[i]->getRoom(WEST)->getWidth() + 1;
-			for(int k = 1; k < length; k++) map[coord][rl[i]->x - k - left] = 1;
+			for(int k = 1; k < length; k++) map[coord][rl[i]->x - k - left] = '1';
 		}
 		check.push_back(rl[i]);
+	}
+
+	for (int i = 0; i < monsters.size(); i++) {
+		char c = monsters[i].getName()[0];
+		map[monsters[i].getY()][monsters[i].getX()] = c;
 	}
 }

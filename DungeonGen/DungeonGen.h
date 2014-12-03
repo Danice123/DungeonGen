@@ -11,9 +11,11 @@ public:
 	void generateRandom(int floors);
 	void loadMonsters();
 
-	std::vector<Floor> getFloors() { return floors; }
+	Floor& getFloor(int i) { return floors[i]; }
+	int getAmountFloors() { return nFloors; }
 private:
-	std::vector<Floor> floors;
+	int nFloors;
+	Floor* floors;
 	std::vector<Monster> monsterList;
 };
 #endif

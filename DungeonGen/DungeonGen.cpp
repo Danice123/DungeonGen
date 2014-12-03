@@ -4,8 +4,10 @@
 using std::string;
 
 void DungeonGen::generateRandom(int size) {
+	nFloors = size;
+	floors = new Floor[size];
 	for (int i = 0; i < size; i++) {
-		floors.push_back(Floor());
+		floors[i].loadMonsters(&monsterList);
 	}
 }
 

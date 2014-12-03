@@ -75,7 +75,13 @@ void Room::setRoom(dir d, Room* room) {
 	}
 }
 
-void Room::printRoom(int** map, int mx, int my) {
+void Room::generateMonsters(std::vector<Monster>& temp, std::vector<MonsterInstance>& list, int mx, int my) {
+	MonsterInstance m(1, temp[0]);
+	m.setCoords(mx + 2, my + 2);
+	list.push_back(m);
+}
+
+void Room::printRoom(char** map, int mx, int my) {
 		for (int i = 0; i < height; i++)
-			for (int j = 0; j < width; j++) map[my + i][mx + j] = 1;
+			for (int j = 0; j < width; j++) map[my + i][mx + j] = '1';
 }

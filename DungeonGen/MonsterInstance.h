@@ -17,6 +17,10 @@ public:
 	int getCurrentHealth() { return currentHealth; }
 	int getAttack() { return attack; }
 	int getArmor() { return armor; }
+
+	int getX() { return x; }
+	int getY() { return y; }
+	void setCoords(int x, int y) { this->x = x; this->y = y; }
 private:
 	std::string name;
 	int health;
