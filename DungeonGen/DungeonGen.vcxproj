@@ -80,6 +80,7 @@
     <ClInclude Include="DungeonGen.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="Monster.h" />
+    <ClInclude Include="MonsterInstance.h" />
     <ClInclude Include="OvalRoom.h" />
     <ClInclude Include="Room.h" />
   </ItemGroup>
