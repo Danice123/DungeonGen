@@ -3,11 +3,13 @@
 #include "Room.h"
 #include "OvalRoom.h"
 #include <vector>
+#include <fstream>
 #include "MonsterInstance.h"
 
 class Floor {
 public:
 	Floor();
+	Floor(std::ifstream&, std::vector<Monster>&);
 	~Floor() {
 		/*for (int i = 0; i < height; i++) delete [] map[i];
 		delete [] map;*/

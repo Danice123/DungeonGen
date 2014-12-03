@@ -9,6 +9,7 @@ public:
 	DungeonGen() {}
 
 	void generateRandom(int floors);
+	void loadFromFile(std::string);
 	void loadMonsters();
 
 	Floor& getFloor(int i) { return floors[i]; }

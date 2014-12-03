@@ -46,8 +46,28 @@ Floor::Floor() {
 			nRooms++;
 		}
 		cout << mRooms - nRooms << " Rooms remaining" << endl;
-		//std::cin.get();
 	} while (nRooms != mRooms);
+}
+
+Floor::Floor(std::ifstream& fin, std::vector<Monster>& list) {
+	int nRooms;
+	int level;
+	fin >> level;
+	fin >> nRooms;
+	std::vector<Room*> rooms;
+	for (int i = 0; i < nRooms; i++) {
+		Room* r = new Room(fin, list, level);
+		rooms.push_back(r);
+	}
+	spawn = *rooms[0];
+	for (int i = 0; i < nRooms; i++) {
+		int n,s,e,w;
+		fin >> n >> s >> e >> w;
+		if (n >= 0) rooms[i]->setRoom(NORTH, rooms[n]);
+		if (s >= 0) rooms[i]->setRoom(SOUTH, rooms[s]);
+		if (e >= 0) rooms[i]->setRoom(EAST, rooms[e]);
+		if (w >= 0) rooms[i]->setRoom(WEST, rooms[w]);
+	}
 }
 
 bool search(std::vector<Room*> v, Room* object) {
@@ -135,8 +155,8 @@ void Floor::genFloorLayout() {
 	}
 	std::vector<Room*> check;
 	for (unsigned i = 0; i < rl.size(); i++) {
-		rl[i]->generateMonsters(*monsterTemplates, monsters, rl[i]->x - left, rl[i]->y - up);
-		rl[i]->printRoom(map, rl[i]->x - left, rl[i]->y - up);
+		rl[i]->generateMonsters(*monsterTemplates);
+		rl[i]->printRoom(map, rl[i]->x - left, rl[i]->y - up, monsters);
 
 		if (rl[i]->getRoom(NORTH) != 0 && !search(check, rl[i]->getRoom(NORTH))) {
 			int sbound = (rl[i]->x > rl[i]->getRoom(NORTH)->x?rl[i]->x:rl[i]->getRoom(NORTH)->x) - left;

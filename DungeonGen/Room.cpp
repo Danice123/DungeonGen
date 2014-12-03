@@ -11,6 +11,34 @@ Room::Room() {
 	id = rand() % 10000;
 }
 
+Room::Room(std::ifstream& fin, std::vector<Monster>& temp, int level) {
+	for (int i = 0; i < 4; i++) nextRooms[i] = 0;
+	fin >> width;
+	fin >> height;
+
+	x = 0;
+	y = 0;
+	adjRooms = 0;
+	id = rand() % 10000;
+
+	int nMonsters;
+	fin >> nMonsters;
+	for (int i = 0; i < nMonsters; i++) {
+		std::string name;
+		fin >> name;
+		MonsterInstance* m;
+		for (int i = 0; i < temp.size(); i++) {
+			if (!name.compare(temp[i].getName()))
+				m = new MonsterInstance(level, temp[i]);
+		}
+		int x, y;
+		fin >> x;
+		fin >> y;
+		m->setCoords(x, y);
+		monsters.push_back(*m);
+	}
+}
+
 void Room::setRoom(dir d, Room* room) {
 	nextRooms[d] = room;
 	adjRooms++;
@@ -75,13 +103,18 @@ void Room::setRoom(dir d, Room* room) {
 	}
 }
 
-void Room::generateMonsters(std::vector<Monster>& temp, std::vector<MonsterInstance>& list, int mx, int my) {
+void Room::generateMonsters(std::vector<Monster>& temp) {
 	MonsterInstance m(1, temp[0]);
-	m.setCoords(mx + 2, my + 2);
-	list.push_back(m);
+	m.setCoords(2, 2);
+	monsters.push_back(m);
 }
 
-void Room::printRoom(char** map, int mx, int my) {
+void Room::printRoom(char** map, int mx, int my, std::vector<MonsterInstance>& list) {
 		for (int i = 0; i < height; i++)
 			for (int j = 0; j < width; j++) map[my + i][mx + j] = '1';
+
+		for (int i = 0; i < monsters.size(); i++) {
+			monsters[i].setCoords(monsters[i].getX() + mx, monsters[i].getY() + my);
+			list.push_back(monsters[i]);
+		}
 }

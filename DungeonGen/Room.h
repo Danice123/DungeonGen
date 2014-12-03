@@ -2,6 +2,7 @@
 #define __DUNGEONROOM_
 #include <cstdlib>
 #include <vector>
+#include <fstream>
 #include "Monster.h"
 #include "MonsterInstance.h"
 
@@ -10,6 +11,7 @@ enum dir { NORTH = 0, SOUTH = 1, EAST = 2, WEST = 3 };
 class Room {
 public:
 	Room();
+	Room(std::ifstream&, std::vector<Monster>&, int);
 	~Room() {
 		/*for (int i = 0; i < 4; i++) {
 			if (nextRooms[i] != 0) {
@@ -27,8 +29,8 @@ public:
 	Room* getRoom(dir d) { return nextRooms[d]; }
 	void setRoom(dir d, Room* room);
 
-	virtual void generateMonsters(std::vector<Monster>& temp, std::vector<MonsterInstance>&, int mx, int my);
-	virtual void printRoom(char** map, int mx, int my);
+	virtual void generateMonsters(std::vector<Monster>& temp);
+	virtual void printRoom(char** map, int mx, int my, std::vector<MonsterInstance>& list);
 
 	int x, y;
 	int id;
