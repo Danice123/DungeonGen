@@ -85,5 +85,17 @@
     <None Include="items\test2.itm">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="hydra.mon">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="bear.mon">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="knife.itm">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="apple.itm">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
