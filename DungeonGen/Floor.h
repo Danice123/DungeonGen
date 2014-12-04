@@ -9,12 +9,14 @@
 
 class Floor {
 public:
-	Floor();
-	Floor(std::ifstream&, std::vector<Monster>&);
+	Floor() {initialized = false;}
 	~Floor() {
-		/*for (int i = 0; i < height; i++) delete [] map[i];
-		delete [] map;*/
+		for (int i = 0; i < height; i++) delete [] map[i];
+		delete [] map;
 	}
+
+	void initializeRandom(std::vector<Monster>&, std::vector<Items>&);
+	void initializeFromFile(std::ifstream&, std::vector<Monster>&, std::vector<Items>&);
 
 	void genFloorLayout();
 
@@ -23,16 +25,12 @@ public:
 	}
 	int getWidth() { return width; }
 	int getHeight() { return height; }
-
-	void loadMonsters(std::vector<Monster>* l) { monsterTemplates = l; }
-	void loadItems(std::vector<Items>* l) { itemTemplates = l; }
 private:
-	Room spawn;
+	bool initialized;
+	Room* spawn;
 	char** map;
 	int width, height;
 	std::vector<MonsterInstance> monsters;
-	std::vector<Monster>* monsterTemplates;
 	std::vector<ItemInstance> items;
-	std::vector<Items>* itemTemplates;
 };
 #endif

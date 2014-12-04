@@ -4,12 +4,14 @@
 using std::cout;
 using std::endl;
 
-Floor::Floor() {
+void Floor::initializeRandom(std::vector<Monster>& tempM, std::vector<Items>& tempI) {
 	std::queue<Room*> rl;
 	int mRooms = 20;
 	int nRooms = 1;
-	rl.push(&spawn);
-	cout << "Spawn: " << spawn.id << endl;
+	spawn = new Room();
+	spawn->initializeRandom(tempM, tempI, 1);
+	rl.push(spawn);
+	cout << "Spawn: " << spawn->id << endl;
 	do {
 		Room* r = rl.front();
 		rl.pop();
@@ -37,6 +39,7 @@ Floor::Floor() {
 			default:
 				newRoom = new Room();
 			}
+			newRoom->initializeRandom(tempM, tempI, 1);
 			r->setRoom((dir) side, newRoom);
 			newRoom->setRoom((dir) (side % 2 == 1?side - 1:side + 1), r);
 			rl.push(newRoom);
@@ -49,17 +52,18 @@ Floor::Floor() {
 	} while (nRooms != mRooms);
 }
 
-Floor::Floor(std::ifstream& fin, std::vector<Monster>& list) {
+void Floor::initializeFromFile(std::ifstream& fin, std::vector<Monster>& list, std::vector<Items>& list2) {
 	int nRooms;
 	int level;
 	fin >> level;
 	fin >> nRooms;
 	std::vector<Room*> rooms;
 	for (int i = 0; i < nRooms; i++) {
-		Room* r = new Room(fin, list, level);
+		Room* r = new Room();
+		r->initializeFromFile(fin, list, list2, level);
 		rooms.push_back(r);
 	}
-	spawn = *rooms[0];
+	spawn = rooms[0];
 	for (int i = 0; i < nRooms; i++) {
 		int n,s,e,w;
 		fin >> n >> s >> e >> w;
@@ -84,13 +88,13 @@ int randDist() {
 #include <vector>
 void Floor::genFloorLayout() {
 	std::vector<Room*> rl;
-	rl.push_back(&spawn);
+	rl.push_back(spawn);
 	unsigned index = 0;
 
 	int left = -1;
 	int up = -1;
-	int right = spawn.getWidth();
-	int down = spawn.getHeight();
+	int right = spawn->getWidth();
+	int down = spawn->getHeight();
 
 	do {
 		Room* r = rl[index];
@@ -155,9 +159,7 @@ void Floor::genFloorLayout() {
 	}
 	std::vector<Room*> check;
 	for (unsigned i = 0; i < rl.size(); i++) {
-		rl[i]->generateMonsters(*monsterTemplates);
-		rl[i]->generateItems(*itemTemplates, items);
-		rl[i]->printRoom(map, rl[i]->x - left, rl[i]->y - up, monsters);
+		rl[i]->printRoom(map, rl[i]->x - left, rl[i]->y - up, monsters, items);
 
 		if (rl[i]->getRoom(NORTH) != 0 && !search(check, rl[i]->getRoom(NORTH))) {
 			int sbound = (rl[i]->x > rl[i]->getRoom(NORTH)->x?rl[i]->x:rl[i]->getRoom(NORTH)->x) - left;

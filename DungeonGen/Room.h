@@ -13,17 +13,19 @@ enum dir { NORTH = 0, SOUTH = 1, EAST = 2, WEST = 3 };
 class Room {
 public:
 	Room();
-	Room(std::ifstream&, std::vector<Monster>&, int);
 	~Room() {
-		/*for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 4; i++) {
 			if (nextRooms[i] != 0) {
-				delete nextRooms[i];
+				Room* r = nextRooms[i];
 				nextRooms[i] = 0;
+				delete r;
 			}
-		}*/
+		}
 	}
 
-	//access
+	virtual void initializeRandom(std::vector<Monster>&, std::vector<Items>&, int);
+	virtual void initializeFromFile(std::ifstream&, std::vector<Monster>&, std::vector<Items>&, int);
+
 	int getWidth() { return width; }
 	int getHeight() { return height; }
 	int getAdjRooms() { return adjRooms; }
@@ -31,18 +33,16 @@ public:
 	Room* getRoom(dir d) { return nextRooms[d]; }
 	void setRoom(dir d, Room* room);
 
-<<<<<<< HEAD
-	virtual void generateMonsters(std::vector<Monster>& temp);
-	virtual void generateItems(std::vector<Items>& temp);
-	virtual void printRoom(char** map, int mx, int my, 
-		std::vector<MonsterInstance>& list, std::vector<ItemInstance>& list2);
+	virtual void printRoom(char** map, int mx, int my, std::vector<MonsterInstance>& list, std::vector<ItemInstance>& list2);
 
 	int x, y;
 	int id;
 protected:
+	bool initialized;
 	int width;
 	int height;
 	std::vector<MonsterInstance> monsters;
+	std::vector<ItemInstance> items;
 private:
 	Room* nextRooms[4];
 	int adjRooms;

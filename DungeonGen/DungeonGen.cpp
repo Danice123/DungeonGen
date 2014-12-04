@@ -7,20 +7,18 @@ void DungeonGen::generateRandom(int size) {
 	nFloors = size;
 	floors = new Floor[size];
 	for (int i = 0; i < size; i++) {
-		floors[i].loadMonsters(&monsterList);
-		floors[i].loadItems(&itemList);
+		floors[i].initializeRandom(monsterList, itemList);
 	}
 }
 
 void DungeonGen::loadFromFile(std::string name) {
 	std::ifstream fin;
+
 	fin.open(name);
 	fin >> nFloors;
 	floors = new Floor[nFloors];
 	for (int i = 0; i < nFloors; i++) {
-		floors[i] = *new Floor(fin, monsterList);
-		floors[i].loadMonsters(&monsterList);
-
+		floors[i].initializeFromFile(fin, monsterList, itemList);
 	}
 	fin.close();
 }
