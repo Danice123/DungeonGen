@@ -96,8 +96,12 @@
     <ClCompile Include="Room.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="apple.itm" />
+    <None Include="bear.mon" />
+    <None Include="hydra.mon" />
     <None Include="items\items.list" />
     <None Include="items\test2.itm" />
+    <None Include="knife.itm" />
     <None Include="monsters\monsters.list" />
     <None Include="monsters\test.mon" />
   </ItemGroup>
