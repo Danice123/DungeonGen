@@ -16,13 +16,13 @@ private:
 
 void TextViewer::draw(DungeonGen gen){
 
-	for (int i = 0; i < gen.getFloor(0).getHeight(); i++) {
-		for (int j = 0; j < gen.getFloor(0).getWidth(); j++) {
-			std::cout << gen.getFloor(0).getTile(j, i);
-		}
-		std::cout << std::endl;
-	}
 
+	for(int a = x_pos; a < x_pos+40 && a < gen.getFloor(0).getWidth(); a++){
+		for (int b = y_pos; b<y_pos+70 && b< gen.getFloor(0).getHeight(); b++){
+					std::cout << gen.getFloor(0).getTile(a, b);
+				}
+				std::cout << std::endl;
+			}
 	while(true){
 		while(true){
 			if(GetAsyncKeyState(VK_RIGHT)){
@@ -53,7 +53,7 @@ void TextViewer::draw(DungeonGen gen){
 		if(y_pos < 0){
 			y_pos = 0;
 		}
-			for(int a = x_pos; a < x_pos+70 && a < gen.getFloor(0).getWidth(); a++){
+			for(int a = x_pos; a < x_pos+40 && a < gen.getFloor(0).getWidth(); a++){
 				for (int b = y_pos; b<y_pos+70 && b< gen.getFloor(0).getHeight(); b++){
 					std::cout << gen.getFloor(0).getTile(a, b);
 				}
