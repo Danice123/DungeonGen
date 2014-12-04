@@ -11,14 +11,19 @@ void DungeonGen::generateRandom(int size) {
 	}
 }
 
+#include <iostream>
 void DungeonGen::loadFromFile(std::string name) {
 	std::ifstream fin;
 
 	fin.open(name);
 	fin >> nFloors;
 	floors = new Floor[nFloors];
+	try {
 	for (int i = 0; i < nFloors; i++) {
 		floors[i].initializeFromFile(fin, monsterList, itemList);
+	}
+	} catch (std::string s) {
+		std::cout << "ERROR: " << s << std::endl;
 	}
 	fin.close();
 }

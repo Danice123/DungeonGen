@@ -76,25 +76,19 @@
     <None Include="monsters\monsters.list">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="monsters\test.mon">
+    <None Include="monsters\bear.mon">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="monsters\hydra.mon">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="items\apple.itm">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="items\items.list">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="items\test2.itm">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="hydra.mon">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="bear.mon">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="knife.itm">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="apple.itm">
+    <None Include="items\knife.itm">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

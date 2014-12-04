@@ -22,11 +22,14 @@ int main() {
 	std::cin >> in;
 	if (in == 1) {
 		cout << "Generating map" << endl;
-		gen.generateRandom(2);
+		gen.generateRandom(4);
 	}
 	if (in == 2) {
+		std::string fname;
+		cout << "Enter map file name: ";
+		std::cin >> fname;
 		cout << "Loading map" << endl;
-		gen.loadFromFile("test.txt");
+		gen.loadFromFile(fname);
 	}
 	cout << "Rendering map" << endl;
 	for (int i = 0; i < gen.getAmountFloors(); i++) gen.getFloor(i).genFloorLayout();
