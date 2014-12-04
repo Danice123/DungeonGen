@@ -85,6 +85,7 @@
     <ClInclude Include="MonsterInstance.h" />
     <ClInclude Include="OvalRoom.h" />
     <ClInclude Include="Room.h" />
+    <ClInclude Include="Text Viewer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DungeonGen.cpp" />

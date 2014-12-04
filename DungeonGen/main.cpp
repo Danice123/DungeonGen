@@ -1,5 +1,7 @@
 #include "DungeonGen.h"
 #include <iostream>
+#include "Windows.h"
+#include "Text Viewer.h"
 using std::cout;
 using std::endl;
 
@@ -7,7 +9,7 @@ int main() {
 	system("cls");
 	srand(1003);
 	DungeonGen gen;
-
+	TextViewer my_viewer;
 	cout << "Loading Monsters" << endl;
 	gen.loadMonsters();
 	std::cin.get();
@@ -24,12 +26,12 @@ int main() {
 	gen.getFloor(0).genFloorLayout();
 	std::cin.get();
 
-	for (int i = 0; i < gen.getFloor(0).getHeight(); i++) {
-		for (int j = 0; j < gen.getFloor(0).getWidth(); j++) {
-			cout << gen.getFloor(0).getTile(j, i);
-		}
-		cout << endl;
-	}
+	
+	
+	/*	*/
+	std::cin.get();
+	my_viewer.draw(gen);
+
 	std::cin.get();
 	return 0;
 }
