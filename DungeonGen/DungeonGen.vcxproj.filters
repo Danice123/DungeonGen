@@ -45,6 +45,9 @@
     <ClInclude Include="Text Viewer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TreasureRoom.h">
+      <Filter>Header Files\Rooms</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DungeonGen.cpp">
@@ -63,6 +66,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Items.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Text Viewer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

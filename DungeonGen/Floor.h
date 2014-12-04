@@ -2,6 +2,7 @@
 #define __DUNGEONFLOOR_
 #include "Room.h"
 #include "OvalRoom.h"
+#include "TreasureRoom.h"
 #include <vector>
 #include <fstream>
 #include "MonsterInstance.h"
@@ -30,6 +31,7 @@ private:
 	Room* spawn;
 	char** map;
 	int width, height;
+	int stairRoom, stairX, stairY;
 	std::vector<MonsterInstance> monsters;
 	std::vector<ItemInstance> items;
 };

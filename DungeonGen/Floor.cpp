@@ -5,9 +5,11 @@ using std::cout;
 using std::endl;
 
 void Floor::initializeRandom(std::vector<Monster>& tempM, std::vector<Items>& tempI) {
+	initialized = true;
 	std::queue<Room*> rl;
-	int mRooms = 20;
+	int mRooms = rand() % 10 + 10;
 	int nRooms = 1;
+	stairRoom = rand() % mRooms;
 	spawn = new Room();
 	spawn->initializeRandom(tempM, tempI, 1);
 	rl.push(spawn);
@@ -32,10 +34,12 @@ void Floor::initializeRandom(std::vector<Monster>& tempM, std::vector<Items>& te
 				continue;
 			}
 			Room* newRoom;
-			switch (rand() % 2) {
-			//case 1:
-				//newRoom = new OvalRoom();
-				//break;
+			switch (rand() % 3) {
+			case 1:
+				newRoom = new OvalRoom();
+				break;
+			case 2:
+				newRoom = new TreasureRoom();
 			default:
 				newRoom = new Room();
 			}
@@ -53,13 +57,19 @@ void Floor::initializeRandom(std::vector<Monster>& tempM, std::vector<Items>& te
 }
 
 void Floor::initializeFromFile(std::ifstream& fin, std::vector<Monster>& list, std::vector<Items>& list2) {
+	initialized = true;
 	int nRooms;
 	int level;
 	fin >> level;
 	fin >> nRooms;
+	fin >> stairRoom;
 	std::vector<Room*> rooms;
 	for (int i = 0; i < nRooms; i++) {
-		Room* r = new Room();
+		std::string type;
+		fin >> type;
+		Room* r;
+		if (!type.compare("Oval")) r = new OvalRoom();
+		else r = new Room();
 		r->initializeFromFile(fin, list, list2, level);
 		rooms.push_back(r);
 	}
@@ -202,6 +212,10 @@ void Floor::genFloorLayout() {
 		}
 		check.push_back(rl[i]);
 	}
+
+	stairX = rl[stairRoom]->x + rand() % rl[stairRoom]->getWidth() - left;
+	stairY = rl[stairRoom]->y + rand() % rl[stairRoom]->getHeight() - up;
+	map[stairY][stairX] = '>';
 
 	for (int i = 0; i < monsters.size(); i++) {
 		char c = monsters[i].getName()[0];

@@ -43,6 +43,8 @@ protected:
 	int height;
 	std::vector<MonsterInstance> monsters;
 	std::vector<ItemInstance> items;
+	int maxMonsters;
+	int maxItems;
 private:
 	Room* nextRooms[4];
 	int adjRooms;

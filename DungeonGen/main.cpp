@@ -7,35 +7,33 @@ using std::endl;
 
 int main() {
 	system("cls");
-	srand(1003);
 	DungeonGen gen;
-	TextViewer my_viewer;
 	cout << "Loading Monsters" << endl;
 	gen.loadMonsters();
-	std::cin.get();
-	
 	cout << "Loading Items" << endl;
 	gen.loadItems();
 	std::cin.get();
+	system("cls");
 
-	cout << "Generating map" << endl;
-	gen.generateRandom(1);
-	std::cin.get();
-
-	/*cout << "Loading map" << endl;
-	gen.loadFromFile("test.txt");
-	std::cin.get();*/
-
+	cout << "What type of map do you wish to view?" << endl;
+	cout << "1: Random" << endl;
+	cout << "2: Load from file" << endl;
+	int in;
+	std::cin >> in;
+	if (in == 1) {
+		cout << "Generating map" << endl;
+		gen.generateRandom(2);
+	}
+	if (in == 2) {
+		cout << "Loading map" << endl;
+		gen.loadFromFile("test.txt");
+	}
 	cout << "Rendering map" << endl;
-	gen.getFloor(0).genFloorLayout();
+	for (int i = 0; i < gen.getAmountFloors(); i++) gen.getFloor(i).genFloorLayout();
 	std::cin.get();
 
-	
-	
-	/*	*/
-	std::cin.get();
+	TextViewer my_viewer;
 	my_viewer.draw(gen);
-
 	std::cin.get();
 	return 0;
 }
